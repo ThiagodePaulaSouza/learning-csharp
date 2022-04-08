@@ -10,15 +10,37 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //conversor de temperatura
-            double c, f, k;
+            //Multiplicação de Matriz
+            int[,] m1 = new int[2, 3];
+            int[,] m2 = new int[3, 2];
+            int[,] resultado = new int[2, 2];
 
-            Console.WriteLine("Converter Temperatura");
-            Console.WriteLine("insia a temperatura em Celsius: ");
-            c = double.Parse(Console.ReadLine());
-            f = (c * 9 / 5) + 322;
-            k = c + 273.15;
-            Console.WriteLine($"o celsius é {c}\nO fahrenheit é {f}\nO kelvin é {k} ");
+            Console.WriteLine("PREENCHA A MATRIZ 1");
+            for (int linha = 0; linha < 2; linha++)
+            {
+                for (int coluna = 0; coluna < 3; coluna++)
+                {
+                    Console.Write($"#1. posição [{linha}][{coluna}] = ");
+                    m1[linha, coluna] = int.Parse(Console.ReadLine());
+                }
+            }
+
+            Console.WriteLine("\nPREENCHA A MATRIZ 2");
+            for (int linha = 0; linha < 3; linha++)
+            {
+                for (int coluna = 0; coluna < 2; coluna++)
+                {
+                    Console.Write($"#2. posição [{linha}][{coluna}] = ");
+                    m2[linha, coluna] = int.Parse(Console.ReadLine());
+                }
+            }
+            Console.WriteLine("\nResultado da Matriz #1 x Matriz #2");
+            resultado[0, 0] = (m1[0, 0] * m2[0, 0]) + (m1[0, 1] * m2[1, 0]) + (m1[0, 2] * m2[2, 0]);
+            resultado[1, 0] = (m1[1, 0] * m2[0, 0]) + (m1[1, 1] * m2[1, 0]) + (m1[1, 2] * m2[2, 0]);
+            resultado[0, 1] = (m1[0, 0] * m2[0, 1]) + (m1[0, 1] * m2[1, 1]) + (m1[0, 2] * m2[2, 1]);
+            resultado[1, 1] = (m1[1, 0] * m2[0, 1]) + (m1[1, 1] * m2[1, 1]) + (m1[1, 2] * m2[2, 1]);
+            Console.WriteLine($"[{resultado[0, 0]}][{resultado[0, 1]}]");
+            Console.WriteLine($"[{resultado[1, 0]}][{resultado[1, 1]}]");
             Console.ReadKey();
         }
     }
