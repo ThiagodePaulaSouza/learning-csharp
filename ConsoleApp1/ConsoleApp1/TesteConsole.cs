@@ -10,36 +10,24 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //imc peso / (altura²)
-            Console.WriteLine("calcular IMC");
+            //goto
+            Inicio: //label
+            Console.WriteLine("Escolha uma opção");
+            int opcao = int.Parse(Console.ReadLine());
+            int valor = 0;
 
-            Console.WriteLine("Digite o peso: ");
-            double peso = double.Parse(Console.ReadLine());
-            Console.WriteLine("Digite o altura: ");
-            double altura = double.Parse(Console.ReadLine());
-
-            double IMC = peso / (altura * altura);
-            if (IMC < 20)
+            switch (opcao)
             {
-                Console.WriteLine($"\n{IMC} você está MUITO MAGRO");
+                default:
+                    goto Inicio;
+                case 1:
+                    valor += 100;
+                    break;
+                case 2:
+                    valor += 50;
+                    goto case 1;
             }
-            else if (IMC >= 20 && IMC <=24)
-            {
-                Console.WriteLine($"\n{IMC} você está NORMAL");
-            }
-            else if (IMC >= 25 && IMC <= 29)
-            {
-                Console.WriteLine($"\n{IMC} você está GORDO");
-            }
-            else if (IMC >= 30 && IMC <= 34)
-            {
-                Console.WriteLine($"\n{IMC} você está MUITO GORDO");
-            }
-            else
-            {
-                Console.WriteLine($"\n{IMC} você está EXTREMAMENTE GORDO");
-            }
-
+            Console.WriteLine("Valor Final " + valor);
 
             Console.ReadKey();
         }
