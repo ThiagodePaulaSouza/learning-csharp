@@ -35,10 +35,10 @@ namespace ConsoleApp1
                 }
             }
             Console.WriteLine("\nResultado da Matriz #1 x Matriz #2");
-            resultado[0, 0] = (m1[0, 0] * m2[0, 0]) + (m1[0, 1] * m2[1, 0]) + (m1[0, 2] * m2[2, 0]);
-            resultado[1, 0] = (m1[1, 0] * m2[0, 0]) + (m1[1, 1] * m2[1, 0]) + (m1[1, 2] * m2[2, 0]);
-            resultado[0, 1] = (m1[0, 0] * m2[0, 1]) + (m1[0, 1] * m2[1, 1]) + (m1[0, 2] * m2[2, 1]);
-            resultado[1, 1] = (m1[1, 0] * m2[0, 1]) + (m1[1, 1] * m2[1, 1]) + (m1[1, 2] * m2[2, 1]);
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                    for (int k = 0; k < 3; k++)
+                        resultado[i, j] += m1[i, j] * m2[k, j];
             Console.WriteLine($"[{resultado[0, 0]}][{resultado[0, 1]}]");
             Console.WriteLine($"[{resultado[1, 0]}][{resultado[1, 1]}]");
             Console.ReadKey();
