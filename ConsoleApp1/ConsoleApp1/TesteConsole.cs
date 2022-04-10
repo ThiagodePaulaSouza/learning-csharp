@@ -10,26 +10,52 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //goto
-            Inicio: //label
-            Console.WriteLine("Escolha uma opção");
-            int opcao = int.Parse(Console.ReadLine());
-            int valor = 0;
+        //calculadora
+        Inicio:
+            Console.Clear();
+            Console.Write("Digite o primeiro numero: ");
+            double num1 = double.Parse(Console.ReadLine());
+            Console.Write("Digite o segundo numero: ");
+            double num2 = double.Parse(Console.ReadLine());
 
-            switch (opcao)
+            Console.WriteLine("Selecione a operação (+ - x /): ");
+            char op = char.Parse(Console.ReadLine());
+            double resultado=0;
+            switch (op)
             {
                 default:
-                    goto Inicio;
-                case 1:
-                    valor += 100;
+                    Console.WriteLine("Error, Escolha a opção válida");
                     break;
-                case 2:
-                    valor += 50;
-                    goto case 1;
+                case '+':
+                    resultado = num1 + num2;
+                    break;
+                case '-':
+                    resultado = num1 - num2;
+                    break;
+                case 'x':
+                    resultado = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 == 0)
+                    {
+                        Console.WriteLine("Não é possivel dividir por 0");
+                        Console.ReadKey();
+                        goto Inicio;
+                    }
+                        
+                    else
+                        resultado = num1 / num2;
+                    
+                    
+                    break;
             }
-            Console.WriteLine("Valor Final " + valor);
-
-            Console.ReadKey();
+            Console.WriteLine($"O resultado é {resultado}");
+            Console.WriteLine("Continuar Calculando (s / n)?");
+            string opcao = Console.ReadLine();
+            if (opcao == "s" || opcao == "S")
+            {
+                goto Inicio;
+            }
         }
     }
 }
