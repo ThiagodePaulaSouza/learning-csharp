@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MinhaCass.cs" />
+    <Compile Include="PessoaAtributos.cs" />
+    <Compile Include="PessoaMetodos.cs" />
     <Compile Include="TesteConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

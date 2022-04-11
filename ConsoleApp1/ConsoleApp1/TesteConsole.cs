@@ -8,11 +8,6 @@ namespace ConsoleApp1
 {
     class TesteConsole
     {
-        //vai se comportar como um metodo escolhido
-        //uma variavel varios metodos
-        delegate void Operacao(int n1, int n2);
-
-
         static void Main(string[] args)
         {
             #region calculadora
@@ -93,22 +88,7 @@ namespace ConsoleApp1
             #endregion
 
             MinhaCass mc = new MinhaCass();
-            Operacao conta = null;
-            conta += mc.Somar;
-            conta += mc.Subtrair;
-            conta += mc.Subtrair;
-
-            conta += mc.Multiplicar;
-            conta += mc.Dividir;
-            conta += mc.Dividir;
-
-            conta(10, 2);
-
-            conta -= mc.Subtrair;
-            conta -= mc.Dividir;
-            Console.WriteLine("\nOutra operação");
-            conta(98, 2);
-            Console.ReadKey();
+            
         }
     }
 }
