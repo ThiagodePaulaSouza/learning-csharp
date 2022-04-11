@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PessoaAtributos.cs" />
-    <Compile Include="PessoaMetodos.cs" />
-    <Compile Include="TesteConsole.cs" />
+    <Compile Include="Bicicleta.cs" />
+    <Compile Include="Carr.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Veiculo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

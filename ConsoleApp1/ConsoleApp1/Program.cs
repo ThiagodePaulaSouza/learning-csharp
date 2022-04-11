@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class TesteConsole
+    class Program
     {
         static void Main(string[] args)
         {
@@ -87,8 +87,9 @@ namespace ConsoleApp1
 
             #endregion
 
-            MinhaCass mc = new MinhaCass();
-            
+            Carr c = new Carr();
+            Bicicleta b = new Bicicleta();
+            c.
         }
     }
 }
