@@ -8,11 +8,14 @@ namespace ConsoleApp1
 {
     class Bicicleta : Veiculo
     {
-        public void Pedalar()
+        public override void Acelerar()
         {
-            Console.WriteLine("pedalei");
+            Console.WriteLine("Acelerou a bike");
         }
 
-        
+        public override void Parar()
+        {
+            Console.WriteLine("Parou a bike");
+        }
     }
 }

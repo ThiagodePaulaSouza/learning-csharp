@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Veiculo
+    //n pode ser instanciada
+    abstract class Veiculo
     {
         public string Cor { get; set; }
         public string Marca { get; set; }
 
-        public void Acelerar()
-        {
-            Console.WriteLine("ACELEREI");
-        }
+        public abstract void Acelerar();
 
-        public void Parar()
-        {
-            Console.WriteLine("PAREI");
-        }
+        public abstract void Parar();
     }
 }

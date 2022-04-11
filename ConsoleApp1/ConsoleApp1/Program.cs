@@ -89,7 +89,9 @@ namespace ConsoleApp1
 
             Carr c = new Carr();
             Bicicleta b = new Bicicleta();
-            c.
+            c.Acelerar();
+            b.Acelerar();
+            Console.ReadKey();
         }
     }
 }
