@@ -62,17 +62,32 @@ namespace ConsoleApp1
             #region Fibonnaci
             // 1 2 R 2 R 2 R 2 R 2 R 2  R 2  
             // 0+1 1+1 2+1 3+2 5+3 8+5 13+8
-            int n1 =0, n2=1, res=0;
-            for (int i = 0; i < 10; i++)
-            {
-                Console.Write($"{res} ");
-                res = n1+n2;
-                n2 = n1;
-                n1 = res;
-            }
-            Console.ReadKey();
-            
+            //int n1 =0, n2=1, res=0;
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    Console.Write($"{res} ");
+            //    res = n1+n2;
+            //    n2 = n1;
+            //    n1 = res;
+            //}
+            //Console.ReadKey();
             #endregion
+            #region ref
+            //ref altera a variavel original
+
+            MinhaCass mc = new MinhaCass();
+            int valornormal = 12;
+            Console.WriteLine("o valor original é " + valornormal);
+            mc.AumentarValor(valornormal);
+            Console.WriteLine("o valor ainda é " + valornormal);
+
+            Console.WriteLine("\no valor original é " + valornormal);
+            mc.AumentarRef(ref valornormal);
+            Console.WriteLine("o valor mudou para " + valornormal);
+            Console.ReadKey();
+
+            #endregion
+
         }
     }
 }
