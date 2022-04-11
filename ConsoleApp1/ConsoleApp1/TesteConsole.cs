@@ -8,6 +8,11 @@ namespace ConsoleApp1
 {
     class TesteConsole
     {
+        //vai se comportar como um metodo escolhido
+        //uma variavel varios metodos
+        delegate void Operacao(int n1, int n2);
+
+
         static void Main(string[] args)
         {
             #region calculadora
@@ -58,7 +63,6 @@ namespace ConsoleApp1
             //        goto Inicio;
             //    }
             #endregion
-
             #region Fibonnaci
             // 1 2 R 2 R 2 R 2 R 2 R 2  R 2  
             // 0+1 1+1 2+1 3+2 5+3 8+5 13+8
@@ -75,19 +79,36 @@ namespace ConsoleApp1
             #region ref
             //ref altera a variavel original
 
-            MinhaCass mc = new MinhaCass();
-            int valornormal = 12;
-            Console.WriteLine("o valor original é " + valornormal);
-            mc.AumentarValor(valornormal);
-            Console.WriteLine("o valor ainda é " + valornormal);
+            //MinhaCass mc = new MinhaCass();
+            //int valornormal = 12;
+            //Console.WriteLine("o valor original é " + valornormal);
+            //mc.AumentarValor(valornormal);
+            //Console.WriteLine("o valor ainda é " + valornormal);
 
-            Console.WriteLine("\no valor original é " + valornormal);
-            mc.AumentarRef(ref valornormal);
-            Console.WriteLine("o valor mudou para " + valornormal);
-            Console.ReadKey();
+            //Console.WriteLine("\no valor original é " + valornormal);
+            //mc.AumentarRef(ref valornormal);
+            //Console.WriteLine("o valor mudou para " + valornormal);
+            //Console.ReadKey();
 
             #endregion
 
+            MinhaCass mc = new MinhaCass();
+            Operacao conta = null;
+            conta += mc.Somar;
+            conta += mc.Subtrair;
+            conta += mc.Subtrair;
+
+            conta += mc.Multiplicar;
+            conta += mc.Dividir;
+            conta += mc.Dividir;
+
+            conta(10, 2);
+
+            conta -= mc.Subtrair;
+            conta -= mc.Dividir;
+            Console.WriteLine("\nOutra operação");
+            conta(98, 2);
+            Console.ReadKey();
         }
     }
 }

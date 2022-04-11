@@ -8,16 +8,22 @@ namespace ConsoleApp1
 {
     class MinhaCass
     {
-        public void AumentarValor(int valor)
+        //delegate serve pra armazenasr ref ded metodos que tem o mesmo formato que foi declarado
+        public void Somar(int n1, int n2)
         {
-            valor += 10;
-            Console.WriteLine($"O valor final é: {valor}");
+            Console.WriteLine($"a soma é {n1 + n2}");
         }
-        // ref tudo que for alterado altera na var original
-        public void AumentarRef(ref int valor)
+        public void Subtrair(int n1, int n2)
         {
-            valor += 10;
-            Console.WriteLine($"O valor final é: {valor}");
+            Console.WriteLine($"a subtração é {n1 - n2}");
+        }
+        public void Multiplicar(int n1, int n2)
+        {
+            Console.WriteLine($"a multiplicação é {n1 * n2}");
+        }
+        public void Dividir(int n1, int n2)
+        {
+            Console.WriteLine($"a divisão é {n1 / n2}");
         }
     }
 }
