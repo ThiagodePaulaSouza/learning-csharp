@@ -58,9 +58,21 @@ namespace ConsoleApp1
             //        goto Inicio;
             //    }
             #endregion
-            Console.WriteLine(Solution("teste"));
-            Console.ReadLine();
+
+            #region Fibonnaci
+            // 1 2 R 2 R 2 R 2 R 2 R 2  R 2  
+            // 0+1 1+1 2+1 3+2 5+3 8+5 13+8
+            int n1 =0, n2=1, res=0;
+            for (int i = 0; i < 10; i++)
+            {
+                Console.Write($"{res} ");
+                res = n1+n2;
+                n2 = n1;
+                n1 = res;
+            }
+            Console.ReadKey();
+            
+            #endregion
         }
-        public static string Solution(string str) => new string (str.Reverse().ToArray());
     }
 }
