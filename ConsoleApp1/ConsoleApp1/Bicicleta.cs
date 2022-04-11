@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Bicicleta : Veiculo
+    //n pode ser herdada
+    sealed class Bicicleta : Veiculo
     {
         public override void Acelerar()
         {
