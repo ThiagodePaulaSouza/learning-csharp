@@ -15,10 +15,14 @@ namespace ChatServer
     public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
     class Servidor
     {
+        #region variaveis + construtor
+
         // armazena usuarios (accessado/consultado por user)
         public static Hashtable htUsuarios = new Hashtable(30);//30 usuarios é o limite definido
+
         // armazena conexões (accessado/consultado por user)
         public static Hashtable htConexoes = new Hashtable(30);//30 usuarios é o limite definido
+
         //armazena o end ip passado
         private IPAddress enderecoIP;
         private int portaHost;
@@ -36,10 +40,17 @@ namespace ChatServer
         }
         //a thread ira tratar o escutador de conexões
         private Thread thrListener;
+
         //obj tcp que escuta as conexoes
         private TcpListener tlsCliente;
+
         // ira dizer ao laço while para manter a monitoração das conexoes
         bool ServRodando = false;
+
+        #endregion
+
+        #region Metodo Incluir Usuarios
+
         public static void IncluirUsuarios(TcpClient tcpUsuario, string strUserName)
         {
             //primeiro inclui o nome e conexão associada para ambas as hash tables
@@ -49,6 +60,11 @@ namespace ChatServer
             //informa a nova conexão para todos os usuários e para o formulário do servidor
             EnviaMensagemAdmin(htConexoes[tcpUsuario] + " entrou...");
         }
+
+        #endregion
+
+        #region Metodo Remover Usuario
+
         public static void RemoverUsuario(TcpClient tcpUsuario)
         {
             //se usuario existir
@@ -56,12 +72,16 @@ namespace ChatServer
             {
                 //primeiro mostra a informação e informa os outros usuarios sobre a conexao
                 EnviaMensagemAdmin(htConexoes[tcpUsuario] + " saiu...");
+
                 //removerUsiario da hash table
                 Servidor.htUsuarios.Remove(Servidor.htConexoes[tcpUsuario]);
                 Servidor.htConexoes.Remove(tcpUsuario);
             }
         }
-        //esse evento é chamado quando queremos idsparar o evento StatusChanged
+
+        #endregion
+
+        //esse evento é chamado quando queremos disparar o evento StatusChanged
         public static void OnStatusChanged(StatusChangedEventArgs e)
         {
             StatusChangedEventHandler statusHandler = StatusChanged;
@@ -73,15 +93,20 @@ namespace ChatServer
                 statusHandler(null, e);
             }
         }
+
+        #region Metodo para exibir mensagem para o server
+
         public static void EnviaMensagemAdmin(string Mensagem)
         {
             StreamWriter swSenderSender;
+
             //exibe primeiro na aplicação
             e = new StatusChangedEventArgs("Administrador: " + Mensagem);
             OnStatusChanged(e);
 
             //cria array de clientes tcp do tamanho do numero de clientes existentes
             TcpClient[] tcpClientes = new TcpClient[Servidor.htUsuarios.Count];
+
             // copia os bj tcpclinte no array
             Servidor.htUsuarios.Values.CopyTo(tcpClientes, 0);
 
@@ -109,6 +134,11 @@ namespace ChatServer
                 }
             }
         }
+
+        #endregion
+
+        #region Metodo para exibir mensagem para o usuario
+
         //envia mensagens de um usuario para todos os outros
         public static void EnviaMensagem(string Origem, string Mensagem)
         {
@@ -120,6 +150,7 @@ namespace ChatServer
 
             //cria um array de cliente TCP do tamanho do numero de clientes existentes
             TcpClient[] tcpClientes = new TcpClient[Servidor.htUsuarios.Count];
+
             //copia os objetos TcpClient no array
             Servidor.htUsuarios.Values.CopyTo(tcpClientes, 0);
 
@@ -147,6 +178,9 @@ namespace ChatServer
             }
         }
 
+        #endregion
+        
+        //starta as threads
         public void IniciaAtendimento()
         {
             try
@@ -174,6 +208,7 @@ namespace ChatServer
 
             }
         }
+
         private void MantemAtendimento()
         {
             //enquanto estiver rodadndo
@@ -183,7 +218,7 @@ namespace ChatServer
                 tcpCliente = tlsCliente.AcceptTcpClient();
                 //cria uma nova instancia da conexão
 
-                //----------- A FAZER -------------//
+                Conexao newConnection = new Conexao(tcpCliente);
             }
         }
     }

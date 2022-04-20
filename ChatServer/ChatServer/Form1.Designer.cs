@@ -31,7 +31,7 @@
             this.txtIP = new System.Windows.Forms.TextBox();
             this.txtPORT = new System.Windows.Forms.TextBox();
             this.btnStartServer = new System.Windows.Forms.Button();
-            this.listaLog = new System.Windows.Forms.TextBox();
+            this.listaLog = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // txtIP
@@ -61,16 +61,18 @@
             this.btnStartServer.TabIndex = 2;
             this.btnStartServer.Text = "Start Server";
             this.btnStartServer.UseVisualStyleBackColor = true;
+            this.btnStartServer.Click += new System.EventHandler(this.btnStartServer_Click);
             // 
             // listaLog
             // 
-            this.listaLog.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaLog.Location = new System.Drawing.Point(13, 73);
-            this.listaLog.Multiline = true;
+            this.listaLog.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaLog.FormattingEnabled = true;
+            this.listaLog.HorizontalScrollbar = true;
+            this.listaLog.ItemHeight = 22;
+            this.listaLog.Location = new System.Drawing.Point(13, 46);
             this.listaLog.Name = "listaLog";
-            this.listaLog.Size = new System.Drawing.Size(645, 365);
+            this.listaLog.Size = new System.Drawing.Size(645, 378);
             this.listaLog.TabIndex = 3;
-            this.listaLog.Text = "listaLog";
             // 
             // Form1
             // 
@@ -93,7 +95,7 @@
         private System.Windows.Forms.TextBox txtIP;
         private System.Windows.Forms.TextBox txtPORT;
         private System.Windows.Forms.Button btnStartServer;
-        private System.Windows.Forms.TextBox listaLog;
+        private System.Windows.Forms.ListBox listaLog;
     }
 }
 
