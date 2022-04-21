@@ -5,123 +5,112 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ChatServer
 {
-    // esse delegate é necessario para especificar os parametros que estamos passando com o nosso evento
+    // Este delegate é necessário para especificar os parametros que estamos pasando com o nosso evento
     public delegate void StatusChangedEventHandler(object sender, StatusChangedEventArgs e);
+
     class Servidor
     {
-        #region variaveis + construtor
-
-        // armazena usuarios (accessado/consultado por user)
-        public static Hashtable htUsuarios = new Hashtable(30);//30 usuarios é o limite definido
-
-        // armazena conexões (accessado/consultado por user)
-        public static Hashtable htConexoes = new Hashtable(30);//30 usuarios é o limite definido
-
-        //armazena o end ip passado
+        // Esta hash table armazena os usuários e as conexões (acessado/consultado por usuário)
+        public static Hashtable htUsuarios = new Hashtable(30); // 30 usuarios é o limite definido
+        // Esta hash table armazena os usuários e as conexões (acessada/consultada por conexão)
+        public static Hashtable htConexoes = new Hashtable(30); // 30 usuários é o limite definido
+        // armazena o endereço IP passado
         private IPAddress enderecoIP;
         private int portaHost;
         private TcpClient tcpCliente;
 
-        // O evento e o seu argumento irá notificar o formulário quando um usuario se conecta, desconecta
+        // O evento e o seu argumento irá notificar o formulário quando um usuário se conecta, desconecta, envia uma mensagem,etc
         public static event StatusChangedEventHandler StatusChanged;
         private static StatusChangedEventArgs e;
 
-        //o construtor define o end ip pra retorna pela instancia do obj
+        // O construtor define o endereço IP para aquele retornado pela instanciação do objeto
         public Servidor(IPAddress endereco, int porta)
         {
-            this.enderecoIP = endereco;
-            this.portaHost = porta;
+            enderecoIP = endereco;
+            portaHost = porta;
         }
-        //a thread ira tratar o escutador de conexões
+
+        // A thread que ira tratar o escutador de conexões
         private Thread thrListener;
 
-        //obj tcp que escuta as conexoes
+        // O objeto TCP object que escuta as conexões
         private TcpListener tlsCliente;
 
-        // ira dizer ao laço while para manter a monitoração das conexoes
+        // Ira dizer ao laço while para manter a monitoração das conexões
         bool ServRodando = false;
 
-        #endregion
-
-        #region Metodo Incluir Usuarios
-
-        public static void IncluirUsuarios(TcpClient tcpUsuario, string strUserName)
+        // Inclui o usuário nas tabelas hash
+        public static void IncluiUsuario(TcpClient tcpUsuario, string strUsername)
         {
-            //primeiro inclui o nome e conexão associada para ambas as hash tables
-            Servidor.htUsuarios.Add(strUserName, tcpUsuario);
-            Servidor.htConexoes.Add(tcpUsuario, strUserName);
+            // Primeiro inclui o nome e conexão associada para ambas as hash tables
+            Servidor.htUsuarios.Add(strUsername, tcpUsuario);
+            Servidor.htConexoes.Add(tcpUsuario, strUsername);
 
-            //informa a nova conexão para todos os usuários e para o formulário do servidor
+            // Informa a nova conexão para todos os usuário e para o formulário do servidor
             EnviaMensagemAdmin(htConexoes[tcpUsuario] + " entrou...");
         }
 
-        #endregion
-
-        #region Metodo Remover Usuario
-
-        public static void RemoverUsuario(TcpClient tcpUsuario)
+        // Remove o usuário das tabelas (hash tables)
+        public static void RemoveUsuario(TcpClient tcpUsuario)
         {
-            //se usuario existir
+            // Se o usuário existir
             if (htConexoes[tcpUsuario] != null)
             {
-                //primeiro mostra a informação e informa os outros usuarios sobre a conexao
+                // Primeiro mostra a informação e informa os outros usuários sobre a conexão
                 EnviaMensagemAdmin(htConexoes[tcpUsuario] + " saiu...");
 
-                //removerUsiario da hash table
+                // Remove o usuário da hash table
                 Servidor.htUsuarios.Remove(Servidor.htConexoes[tcpUsuario]);
                 Servidor.htConexoes.Remove(tcpUsuario);
             }
         }
 
-        #endregion
-
-        //esse evento é chamado quando queremos disparar o evento StatusChanged
+        // Este evento é chamado quando queremos disparar o evento StatusChanged
         public static void OnStatusChanged(StatusChangedEventArgs e)
         {
             StatusChangedEventHandler statusHandler = StatusChanged;
 
-            //verificar se é null
             if (statusHandler != null)
             {
-                //invoca o delegate
+                // invoca o  delegate
                 statusHandler(null, e);
             }
         }
 
-        #region Metodo para exibir mensagem para o server
-
+        // Envia mensagens administrativas
         public static void EnviaMensagemAdmin(string Mensagem)
         {
             StreamWriter swSenderSender;
 
-            //exibe primeiro na aplicação
+            // Exibe primeiro na aplicação
             e = new StatusChangedEventArgs("Administrador: " + Mensagem);
             OnStatusChanged(e);
 
-            //cria array de clientes tcp do tamanho do numero de clientes existentes
+            // Cria um array de clientes TCPs do tamanho do numero de clientes existentes
             TcpClient[] tcpClientes = new TcpClient[Servidor.htUsuarios.Count];
-
-            // copia os bj tcpclinte no array
+            // Copia os objetos TcpClient no array
             Servidor.htUsuarios.Values.CopyTo(tcpClientes, 0);
 
-            //percorre a lista de clientes tcp
+            // Percorre a lista de clientes TCP
             for (int i = 0; i < tcpClientes.Length; i++)
             {
-                // tenta enviar uma mensagem para cada cliente
+                // Tenta enviar uma mensagem para cada cliente
                 try
                 {
-                    //se a mensagem estiver em braco ou nula sai
+                    // Se a mensagem estiver em branco ou a conexão for nula sai...
                     if (Mensagem.Trim() == "" || tcpClientes[i] == null)
                     {
                         continue;
                     }
-                    //envia mensagem para o usuario atual no laço
+
+                    // Envia a mensagem para o usuário atual no laço
                     swSenderSender = new StreamWriter(tcpClientes[i].GetStream());
                     swSenderSender.WriteLine("Administrador: " + Mensagem);
                     swSenderSender.Flush();
@@ -129,76 +118,68 @@ namespace ChatServer
                 }
                 catch
                 {
-                    //se houve algum problema o user n existe então remove]
-                    RemoverUsuario(tcpClientes[i]);
+                    // Se houver um problema , o usuário não existe , então remove-o
+                    RemoveUsuario(tcpClientes[i]);
                 }
             }
         }
 
-        #endregion
-
-        #region Metodo para exibir mensagem para o usuario
-
-        //envia mensagens de um usuario para todos os outros
+        // Envia mensagens de um usuário para todos os outros
         public static void EnviaMensagem(string Origem, string Mensagem)
         {
             StreamWriter swSenderSender;
 
-            //primeiro exibe a mensagem na aplicação 
-            e = new StatusChangedEventArgs(Origem + " disse: " + Mensagem);
+            // Primeiro exibe a mensagem na aplicação
+            e = new StatusChangedEventArgs(Origem + " disse : " + Mensagem);
             OnStatusChanged(e);
 
-            //cria um array de cliente TCP do tamanho do numero de clientes existentes
+            // Cria um array de clientes TCPs do tamanho do numero de clientes existentes
             TcpClient[] tcpClientes = new TcpClient[Servidor.htUsuarios.Count];
-
-            //copia os objetos TcpClient no array
+            // Copia os objetos TcpClient no array
             Servidor.htUsuarios.Values.CopyTo(tcpClientes, 0);
+            // Percorre a lista de clientes TCP
 
-            //percorre a lista de clientes tcp
             for (int i = 0; i < tcpClientes.Length; i++)
             {
+                // Tenta enviar uma mensagem para cada cliente
                 try
                 {
-                    //se a mensagem estiver em branco ou a conexão for nula sai...
+                    // Se a mensagem estiver em branco ou a conexão for nula sai...
                     if (Mensagem.Trim() == "" || tcpClientes[i] == null)
                     {
                         continue;
                     }
-                    //envia a mensagem para o usuario atual no laço
+                    // Envia a mensagem para o usuário atual no laço
                     swSenderSender = new StreamWriter(tcpClientes[i].GetStream());
-                    swSenderSender.WriteLine(Origem + "disse: " + Mensagem);
+                    swSenderSender.WriteLine(Origem + " disse: " + Mensagem);
                     swSenderSender.Flush();
                     swSenderSender = null;
                 }
-                catch
+                catch // Se houver um problema , o usuário não existe , então remove-o
                 {
-                    //se houver problema remove usuario (n existe)
-                    RemoverUsuario(tcpClientes[i]);
+                    RemoveUsuario(tcpClientes[i]);
                 }
             }
         }
 
-        #endregion
-        
-        //starta as threads
         public void IniciaAtendimento()
         {
             try
             {
-                //pegar ip
-                IPAddress ipalocal = enderecoIP;
-                int portalocal = portaHost;
+                // Pega o IP
+                IPAddress ipaLocal = enderecoIP;
+                int portaLocal = portaHost;
 
-                //cria um objeto tcp listener usando o ip do servidor e porta definidas
-                tlsCliente = new TcpListener(ipalocal, portalocal);
+                // Cria um objeto TCP listener usando o IP do servidor e porta definidas
+                tlsCliente = new TcpListener(ipaLocal, portaLocal);
 
-                //inicia o tcp listener e escuta as conexoes
+                // Inicia o TCP listener e escuta as conexões
                 tlsCliente.Start();
 
-                //o  laço while verifica se o servidor está rodando antes de checar as conexoes
+                // O laço While verifica se o servidor esta rodando antes de checar as conexões
                 ServRodando = true;
 
-                //inicia uma nova thread que hospeda o listener
+                // Inicia uma nova tread que hospeda o listener
                 thrListener = new Thread(MantemAtendimento);
                 thrListener.IsBackground = true;
                 thrListener.Start();
@@ -211,13 +192,12 @@ namespace ChatServer
 
         private void MantemAtendimento()
         {
-            //enquanto estiver rodadndo
+            // Enquanto o servidor estiver rodando
             while (ServRodando)
             {
-                //aceita conexao pendente
+                // Aceita uma conexão pendente
                 tcpCliente = tlsCliente.AcceptTcpClient();
-                //cria uma nova instancia da conexão
-
+                // Cria uma nova instância da conexão
                 Conexao newConnection = new Conexao(tcpCliente);
             }
         }

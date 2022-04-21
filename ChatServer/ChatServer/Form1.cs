@@ -14,7 +14,9 @@ namespace ChatServer
     public partial class Form1 : Form
     {
         private delegate void AtualizaStatusCallback(string strMensagem);
+
         bool conectado = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,55 +29,56 @@ namespace ChatServer
                 Application.Exit();
                 return;
             }
+
             if (txtIP.Text == string.Empty)
             {
-                MessageBox.Show("Informe o endereço IP");
+                MessageBox.Show("Informe o endereço IP.");
                 txtIP.Focus();
                 return;
             }
+
             try
             {
-                // analisa end ip do servidor informado no textbox
+                // Analisa o endereço IP do servidor informado no textbox
                 IPAddress enderecoIP = IPAddress.Parse(txtIP.Text);
-                int portaHost = int.Parse(txtPORT.Text);
+                int portaHost = (int)numPorta.Value;
 
-                //cria uma nova instancia do objeto chatServidor
+                // Cria uma nova instância do objeto ChatServidor
                 Servidor mainServidor = new Servidor(enderecoIP, portaHost);
 
-                //vincula o tratamento de evento StatusChanged a mainServer_StatusChanged
+                // Vincula o tratamento de evento StatusChanged a mainServer_StatusChanged
                 Servidor.StatusChanged += new StatusChangedEventHandler(mainServidor_StatusChanged);
 
-                //inicia atendimento
+                // Inicia o atendimento das conexões
                 mainServidor.IniciaAtendimento();
 
-                //mostra que nos iniciamos o antendimento para conexões
-                
+                // Mostra que nos iniciamos o atendimento para conexões
                 listaLog.Items.Add("Servidor ativo, aguardando usuários conectarem-se...");
                 listaLog.SetSelected(listaLog.Items.Count - 1, true);
-                
             }
             catch (Exception ex)
             {
-                listaLog.Items.Add("Erro de conexao: " + ex.Message);
+                listaLog.Items.Add("Erro de conexão : " + ex.Message);
                 listaLog.SetSelected(listaLog.Items.Count - 1, true);
-                
                 return;
             }
+
             conectado = true;
             txtIP.Enabled = false;
-            txtPORT.Enabled = false;
+            numPorta.Enabled = false;
             btnStartServer.ForeColor = Color.Red;
             btnStartServer.Text = "Sair";
         }
+
         public void mainServidor_StatusChanged(object sender, StatusChangedEventArgs e)
         {
-            //chama metodo que atualiza formulario
-            //invoke para trabalhar com threads diferentes
+            // Chama o método que atualiza o formulário
             this.Invoke(new AtualizaStatusCallback(this.AtualizaStatus), new object[] { e.EventMessage });
         }
+
         private void AtualizaStatus(string strMensagem)
         {
-            //atualiza o logo com mensagem
+            // Atualiza o logo com mensagens
             listaLog.Items.Add(strMensagem);
             listaLog.SetSelected(listaLog.Items.Count - 1, true);
         }
