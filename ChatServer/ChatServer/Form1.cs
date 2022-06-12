@@ -39,14 +39,12 @@ namespace ChatServer
 
             try
             {
-                // Analisa o endereço IP do servidor informado no textbox
                 IPAddress enderecoIP = IPAddress.Parse(txtIP.Text);
                 int portaHost = (int)numPorta.Value;
 
-                // Cria uma nova instância do objeto ChatServidor
                 Servidor mainServidor = new Servidor(enderecoIP, portaHost);
 
-                // Vincula o tratamento de evento StatusChanged a mainServer_StatusChanged
+                // Vincula o evento StatusChanged a atualização do formulario (mainServidor_StatusChanged)
                 Servidor.StatusChanged += new StatusChangedEventHandler(mainServidor_StatusChanged);
 
                 // Inicia o atendimento das conexões

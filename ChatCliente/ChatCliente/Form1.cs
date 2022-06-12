@@ -111,7 +111,7 @@ namespace ChatCliente
             }
             catch (Exception ex)
             {
-                labelStatus.Invoke(new Action(()=> {
+                labelStatus.Invoke(new Action(() => {
                     labelStatus.ForeColor = Color.Red;
                     labelStatus.Text = "Erro na conexão com o servidor : \n" + ex.Message;
                 }));

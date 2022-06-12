@@ -54,7 +54,7 @@ namespace ChatServer
             Servidor.htConexoes.Add(tcpUsuario, strUsername);
 
             // Informa a nova conexão para todos os usuário e para o formulário do servidor
-            EnviaMensagemAdmin(htConexoes[tcpUsuario] + " entrou...");
+            EnviaMensagemAdmin(htConexoes[tcpUsuario] + " Entrou...");
         }
 
         // Remove o usuário das tabelas (hash tables)
@@ -64,7 +64,7 @@ namespace ChatServer
             if (htConexoes[tcpUsuario] != null)
             {
                 // Primeiro mostra a informação e informa os outros usuários sobre a conexão
-                EnviaMensagemAdmin(htConexoes[tcpUsuario] + " saiu...");
+                EnviaMensagemAdmin(htConexoes[tcpUsuario] + " Saiu...");
 
                 // Remove o usuário da hash table
                 Servidor.htUsuarios.Remove(Servidor.htConexoes[tcpUsuario]);
@@ -130,7 +130,7 @@ namespace ChatServer
             StreamWriter swSenderSender;
 
             // Primeiro exibe a mensagem na aplicação
-            e = new StatusChangedEventArgs(Origem + " disse : " + Mensagem);
+            e = new StatusChangedEventArgs(Origem + " : " + Mensagem);
             OnStatusChanged(e);
 
             // Cria um array de clientes TCPs do tamanho do numero de clientes existentes
@@ -151,7 +151,7 @@ namespace ChatServer
                     }
                     // Envia a mensagem para o usuário atual no laço
                     swSenderSender = new StreamWriter(tcpClientes[i].GetStream());
-                    swSenderSender.WriteLine(Origem + " disse: " + Mensagem);
+                    swSenderSender.WriteLine(Origem + " : " + Mensagem);
                     swSenderSender.Flush();
                     swSenderSender = null;
                 }
@@ -166,14 +166,12 @@ namespace ChatServer
         {
             try
             {
-                // Pega o IP
                 IPAddress ipaLocal = enderecoIP;
                 int portaLocal = portaHost;
 
-                // Cria um objeto TCP listener usando o IP do servidor e porta definidas
                 tlsCliente = new TcpListener(ipaLocal, portaLocal);
 
-                // Inicia o TCP listener e escuta as conexões
+                // Escuta as conexões
                 tlsCliente.Start();
 
                 // O laço While verifica se o servidor esta rodando antes de checar as conexões
