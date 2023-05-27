@@ -6,3 +6,4 @@ instalar .net v4.8 developerPack
 - [ChatFlor](https://github.com/ThiagodePaulaSouza/APS_5-semestre)
 - [Jogo de pong](https://github.com/ThiagodePaulaSouza/Pong-CS)
 - [Todo APi](./TodoApi)
+- [Api Minima](./https://github.com/ThiagodedPaulaSouza/api-minima-csharp)
