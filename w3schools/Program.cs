@@ -34,6 +34,27 @@ namespace W3schools
 
       double myDou = 124535.3232D;
       Console.WriteLine(myDou);
+
+      // Implicit Casting
+      int Nove = 9;
+      double DNove = Nove;
+      Console.WriteLine(Nove); //int
+      Console.WriteLine(DNove); //double
+
+      // Explicit Casting
+      double NoveDecimal = 9.31;
+      int novoIntNove = (int) NoveDecimal;
+      Console.WriteLine(NoveDecimal);
+      Console.WriteLine(novoIntNove);
+
+      // Type Conversion Methods
+      int Dez = 10;
+      double DezDouble = 10.333;
+      bool boleanoBonitao = true;
+      Console.WriteLine(Convert.ToString(Dez));
+      Console.WriteLine(Convert.ToDouble(Dez));
+      Console.WriteLine(Convert.ToInt32(DezDouble));
+      Console.WriteLine(Convert.ToString(boleanoBonitao));
     }
   }
 }

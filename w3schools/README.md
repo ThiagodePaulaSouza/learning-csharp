@@ -16,3 +16,9 @@ bool -- 1bit -- Stores true or false values
 char -- 2bytes -- Stores a single character/letter, surrounded by single quotes
 string -- 2bytes per character -- Stores a sequence of characters, surrounded by double quotes
 
+Implicit Casting (automatically) - converting a smaller type to a larger type size
+char -> int -> long -> float -> double
+
+Explicit Casting (manually) - converting a larger type to a smaller sizer type
+double -> float -> long -> int -> char
+
