@@ -77,6 +77,18 @@ namespace W3schools
       int aa = 5;
       aa <<= 3;
       Console.WriteLine(aa); // 40
+
+      string hello = "Oi";
+      Console.WriteLine(hello[1]); // O
+
+      Console.WriteLine(hello.IndexOf("i"));
+
+      // getting last name 
+      
+      string nomezin = "Thiago Souza";
+      int posicaoChar = nomezin.IndexOf('S');
+      string ultimoNome = nomezin.Substring(posicaoChar);
+      Console.WriteLine(ultimoNome);
     }
   }
 }
