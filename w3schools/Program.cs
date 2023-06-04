@@ -55,6 +55,28 @@ namespace W3schools
       Console.WriteLine(Convert.ToDouble(Dez));
       Console.WriteLine(Convert.ToInt32(DezDouble));
       Console.WriteLine(Convert.ToString(boleanoBonitao));
+
+      Console.WriteLine(2 | 5);
+      Console.WriteLine(2 & 4);
+      Console.WriteLine(9 ^ 4);
+      Console.WriteLine(9 >> 4);
+      Console.WriteLine(4 << 6);
+
+      int ll = 5;
+      ll &= 3;
+      Console.WriteLine(ll); // 1
+
+      int zz = 5;
+      zz |= 3;
+      Console.WriteLine(zz); //7
+
+      int nn = 5;
+      nn >>= 3;
+      Console.WriteLine(nn); //0
+
+      int aa = 5;
+      aa <<= 3;
+      Console.WriteLine(aa); // 40
     }
   }
 }
