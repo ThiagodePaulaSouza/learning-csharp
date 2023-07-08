@@ -32,4 +32,20 @@ app.MapGet("/fornecedores/{id}", async (Guid id, MinimalContextDb context) =>
 .WithName("GetFornecedoresPorId")
 .WithTags("Fornecedor");
 
+app.MapPost("/fornecedores", async (MinimalContextDb context, Fornecedor fornecedor) =>
+{
+    // Fazer validações do fornecedor
+    context.Fornecedores.Add(fornecedor);
+    var result = await context.SaveChangesAsync();
+
+    return result > 0
+        ? Results.Created($"/fornecedor/{fornecedor.Id}", fornecedor)
+        : Results.BadRequest();
+}
+)
+.Produces<Fornecedor>(StatusCodes.Status201Created)
+.Produces(StatusCodes.Status400BadRequest)
+.WithName("PostFornecedor")
+.WithTags("Fornecedor");
+
 app.Run();
