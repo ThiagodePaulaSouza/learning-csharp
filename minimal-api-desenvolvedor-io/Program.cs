@@ -48,4 +48,43 @@ app.MapPost("/fornecedores", async (MinimalContextDb context, Fornecedor fornece
 .WithName("PostFornecedor")
 .WithTags("Fornecedor");
 
+// FIXME: System.InvalidOperationException: The instance of entity type 'Fornecedor' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+app.MapPut("fornecedor/{fornecedorId}", async (Guid fornecedorId, MinimalContextDb context, Fornecedor fornecedor) =>
+{
+    var target = await context.Fornecedores.FindAsync(fornecedorId);
+    if (target == null) return Results.NotFound();
+
+    // Fazer validações do fornecedor
+    context.Fornecedores.Update(fornecedor);
+    var result = await context.SaveChangesAsync();
+
+    return result > 0
+        ? Results.NoContent()
+        : Results.BadRequest();
+}
+)
+.Produces<Fornecedor>(StatusCodes.Status204NoContent)
+.Produces(StatusCodes.Status400BadRequest)
+.WithName("PutFornecedor")
+.WithTags("Fornecedor");
+
+app.MapDelete("fornecedor/{fornecedorId}", async (Guid fornecedorId, MinimalContextDb context) =>
+{
+    var target = await context.Fornecedores.FindAsync(fornecedorId);
+    if (target == null) return Results.NotFound();
+
+    // Fazer validações do fornecedor
+    context.Fornecedores.Remove(target);
+    var result = await context.SaveChangesAsync();
+
+    return result > 0
+        ? Results.NoContent()
+        : Results.BadRequest();
+}
+)
+.Produces<Fornecedor>(StatusCodes.Status204NoContent)
+.Produces(StatusCodes.Status400BadRequest)
+.WithName("DeleteFornecedor")
+.WithTags("Fornecedor");
+
 app.Run();
