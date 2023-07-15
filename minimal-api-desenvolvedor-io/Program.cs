@@ -48,10 +48,9 @@ app.MapPost("/fornecedores", async (MinimalContextDb context, Fornecedor fornece
 .WithName("PostFornecedor")
 .WithTags("Fornecedor");
 
-// FIXME: System.InvalidOperationException: The instance of entity type 'Fornecedor' cannot be tracked because another instance with the same key value for {'Id'} is already being tracked. When attaching existing entities, ensure that only one entity instance with a given key value is attached. Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
 app.MapPut("fornecedor/{fornecedorId}", async (Guid fornecedorId, MinimalContextDb context, Fornecedor fornecedor) =>
 {
-    var target = await context.Fornecedores.FindAsync(fornecedorId);
+    var target = await context.Fornecedores.AsNoTracking<Fornecedor>().FirstOrDefaultAsync(f => f.Id == fornecedorId);
     if (target == null) return Results.NotFound();
 
     // Fazer validações do fornecedor
