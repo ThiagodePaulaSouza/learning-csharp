@@ -1,3 +1,7 @@
+using CloudCustomers.API.Controllers;
+using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace CloudCustomers.UnitTests.Systems.Controllers;
@@ -5,8 +9,15 @@ namespace CloudCustomers.UnitTests.Systems.Controllers;
 public class TestUsersController
 {
     [Fact]
-    public void Test1()
+    public async Task GET_OnSuccess_Returns_StatusCode200()
     {
-        Assert.True(true);
+        // Arrange
+        var sut = new UsersController();
+
+        // Act
+        var result = (OkObjectResult)await sut.GetUsers();
+
+        // Assert
+        result.StatusCode.Should().Be(200);
     }
 }

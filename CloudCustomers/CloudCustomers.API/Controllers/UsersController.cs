@@ -7,16 +7,16 @@ namespace CloudCustomers.API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly ILogger<UsersController> logger;
-        public UsersController(ILogger<UsersController> logger)
+        //private readonly ILogger<UsersController> logger;
+        public UsersController(/*ILogger<UsersController> logger*/)
         {
-            this.logger = logger;
+          //  this.logger = logger;
         }
 
         [HttpGet(Name = "GetUsers")]
         public async Task<IActionResult> GetUsers()
         {
-            return Ok();
+            return Ok("alguma coisa");
         }
     }
 }

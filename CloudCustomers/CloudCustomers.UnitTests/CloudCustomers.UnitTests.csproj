@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -26,6 +26,10 @@
 
   <ItemGroup>
     <Folder Include="Fixtures\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CloudCustomers.API\CloudCustomers.API.csproj" />
   </ItemGroup>
 
 </Project>
