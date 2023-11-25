@@ -44,4 +44,32 @@ public class TestUsersController
         // Assert
         mockUsersService.Verify(service => service.GetAllUsers(), Times.Once());
     }
+
+    [Fact]
+    public async Task GET_OnSuccess_ReturnsListOfUsers()
+    {
+        // Arrange
+        var expectedResult = new List<User>()
+        {
+            new User(1, "João", "joao@gmail.com", new Address("", "", "")),
+            new User(2, "Mario", "Mario@gmail.com", new Address("", "", "")),
+            new User(3, "José", "José@gmail.com", new Address("", "", "")),
+            new User(4, "Mariana", "Mariana@gmail.com", new Address("", "", "")),
+            new User(5, "Gabriele", "Gabriele@gmail.com", new Address("", "", ""))
+        };
+
+        var mockUsersService = new Mock<IUserService>();
+        mockUsersService
+            .Setup(service => service.GetAllUsers())
+            .ReturnsAsync(expectedResult);
+        var sut = new UsersController(mockUsersService.Object);
+
+        // Act
+        var result = (OkObjectResult)await sut.GetUsers();
+
+        // Assert
+        
+
+        result.Value.Should().Be(expectedResult);
+    }
 }

@@ -21,6 +21,8 @@ namespace CloudCustomers.API.Services
                 new User(5, "Gabriele", "Gabriele@gmail.com", new Address("", "", ""))
             };
 
+            var outro = teste;
+
             return Task.FromResult(teste);
         }
     }
