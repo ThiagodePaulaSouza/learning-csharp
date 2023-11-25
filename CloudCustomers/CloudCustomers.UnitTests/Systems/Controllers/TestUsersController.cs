@@ -1,6 +1,7 @@
 using CloudCustomers.API.Controllers;
 using CloudCustomers.API.Models;
 using CloudCustomers.API.Services;
+using CloudCustomers.UnitTests.Fixtures;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
@@ -18,7 +19,7 @@ public class TestUsersController
         var mockUsersService = new Mock<IUserService>();
         mockUsersService
             .Setup(service => service.GetAllUsers())
-            .ReturnsAsync(new List<User>() { new User(1, "João", "joao@gmail.com", new Address("", "", "")) });
+            .ReturnsAsync(UserFixture.GetTestUsers());
         var sut = new UsersController(mockUsersService.Object);
 
         // Act
@@ -35,7 +36,7 @@ public class TestUsersController
         var mockUsersService = new Mock<IUserService>();
         mockUsersService
             .Setup(service => service.GetAllUsers())
-            .ReturnsAsync(new List<User>() { new User(1, "João", "joao@gmail.com", new Address("", "", "")) });
+            .ReturnsAsync(UserFixture.GetTestUsers());
         var sut = new UsersController(mockUsersService.Object);
 
         // Act
@@ -49,14 +50,7 @@ public class TestUsersController
     public async Task GET_OnSuccess_ReturnsListOfUsers()
     {
         // Arrange
-        var expectedResult = new List<User>()
-        {
-            new User(1, "João", "joao@gmail.com", new Address("", "", "")),
-            new User(2, "Mario", "Mario@gmail.com", new Address("", "", "")),
-            new User(3, "José", "José@gmail.com", new Address("", "", "")),
-            new User(4, "Mariana", "Mariana@gmail.com", new Address("", "", "")),
-            new User(5, "Gabriele", "Gabriele@gmail.com", new Address("", "", ""))
-        };
+        var expectedResult = UserFixture.GetTestUsers();
 
         var mockUsersService = new Mock<IUserService>();
         mockUsersService
