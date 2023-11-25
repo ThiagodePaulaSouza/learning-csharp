@@ -65,11 +65,12 @@ public class TestUsersController
         var sut = new UsersController(mockUsersService.Object);
 
         // Act
-        var result = (OkObjectResult)await sut.GetUsers();
+        var result = await sut.GetUsers();
 
         // Assert
-        
-
-        result.Value.Should().Be(expectedResult);
+        result.Should().BeOfType<OkObjectResult>();
+        var objectResult = (OkObjectResult)result;
+        objectResult.Value.Should().BeOfType<List<User>>();
+        objectResult.Value.Should().Be(expectedResult);
     }
 }
