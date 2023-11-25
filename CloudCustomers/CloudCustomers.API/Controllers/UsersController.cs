@@ -9,8 +9,8 @@ namespace CloudCustomers.API.Controllers
     public class UsersController : ControllerBase
     {
         
-        private readonly IUserService _userService;
-        public UsersController(IUserService userService)
+        private readonly IUsersService _userService;
+        public UsersController(IUsersService userService)
         {
             _userService = userService;
         }

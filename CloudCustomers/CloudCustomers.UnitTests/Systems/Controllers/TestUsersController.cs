@@ -2,10 +2,9 @@ using CloudCustomers.API.Controllers;
 using CloudCustomers.API.Models;
 using CloudCustomers.API.Services;
 using CloudCustomers.UnitTests.Fixtures;
-using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
+using FluentAssertions;
 using Moq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace CloudCustomers.UnitTests.Systems.Controllers;
@@ -16,7 +15,7 @@ public class TestUsersController
     public async Task GET_OnSuccess_Returns_StatusCode200()
     {
         // Arrange
-        var mockUsersService = new Mock<IUserService>();
+        var mockUsersService = new Mock<IUsersService>();
         mockUsersService
             .Setup(service => service.GetAllUsers())
             .ReturnsAsync(UserFixture.GetTestUsers());
@@ -33,7 +32,7 @@ public class TestUsersController
     public async Task GET_OnSuccess_InvokesUserService_ExactlyOne()
     {
         // Arrange
-        var mockUsersService = new Mock<IUserService>();
+        var mockUsersService = new Mock<IUsersService>();
         mockUsersService
             .Setup(service => service.GetAllUsers())
             .ReturnsAsync(UserFixture.GetTestUsers());
@@ -52,7 +51,7 @@ public class TestUsersController
         // Arrange
         var expectedResult = UserFixture.GetTestUsers();
 
-        var mockUsersService = new Mock<IUserService>();
+        var mockUsersService = new Mock<IUsersService>();
         mockUsersService
             .Setup(service => service.GetAllUsers())
             .ReturnsAsync(expectedResult);
@@ -72,7 +71,7 @@ public class TestUsersController
     public async Task GET_OnNoUsersFound_Returns_StatusCode404()
     {
         // Arrange
-        var mockUsersService = new Mock<IUserService>();
+        var mockUsersService = new Mock<IUsersService>();
         mockUsersService
             .Setup(service => service.GetAllUsers())
             .ReturnsAsync(new List<User>());
