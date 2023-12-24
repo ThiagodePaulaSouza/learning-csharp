@@ -1,0 +1,1 @@
+- Benchmark of Count Any Exists [ref doc](./Thiago.Docs/Count_Any_Exists.md)

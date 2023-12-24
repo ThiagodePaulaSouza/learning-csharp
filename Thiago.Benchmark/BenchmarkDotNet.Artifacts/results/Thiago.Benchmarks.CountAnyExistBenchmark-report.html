@@ -2,7 +2,7 @@
 <html lang='en'>
 <head>
 <meta charset='utf-8' />
-<title>Thiago.Benchmarks.CountAnyExistBenchmark-20231224-001636</title>
+<title>Thiago.Benchmarks.CountAnyExistBenchmark-20231224-011631</title>
 
 <style type="text/css">
 	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
@@ -22,11 +22,20 @@ BenchmarkDotNet v0.13.11, Windows 11 (10.0.22621.2861/22H2/2022Update/SunValley2
 <pre><code></code></pre>
 
 <table>
-<thead><tr><th>Method              </th><th>Mean</th><th>Error</th><th>StdDev</th>
+<thead><tr><th>Method               </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Median</th>
 </tr>
-</thead><tbody><tr><td>Count_Get10UsersMatchName</td><td>260.1 ms</td><td>24.51 ms</td><td>72.26 ms</td>
-</tr><tr><td>Any_Get10UsersMatchName</td><td>345.1 ms</td><td>5.02 ms</td><td>4.45 ms</td>
-</tr><tr><td>Exists_Get10UsersMatchName</td><td>342.9 ms</td><td>2.46 ms</td><td>2.18 ms</td>
+</thead><tbody><tr><td>Count_Get10UsersMatchName</td><td>209.555 ms</td><td>44.4004 ms</td><td>130.9156 ms</td><td>196.939 ms</td>
+</tr><tr><td>Any_Get10UsersMatchName</td><td>227.628 ms</td><td>60.1100 ms</td><td>177.2356 ms</td><td>345.372 ms</td>
+</tr><tr><td>Exists_Get10UsersMatchName</td><td>185.814 ms</td><td>31.7880 ms</td><td>92.2227 ms</td><td>147.344 ms</td>
+</tr><tr><td>Count_Get1000BooksMatchId</td><td>1.207 ms</td><td>0.0240 ms</td><td>0.0373 ms</td><td>1.198 ms</td>
+</tr><tr><td>Any_Get1000BooksMatchId</td><td>1.214 ms</td><td>0.0239 ms</td><td>0.0372 ms</td><td>1.215 ms</td>
+</tr><tr><td>Exists_Get1000BooksMatchId</td><td>1.209 ms</td><td>0.0239 ms</td><td>0.0357 ms</td><td>1.201 ms</td>
+</tr><tr><td>Count_Get5000BooksMatchId</td><td>5.826 ms</td><td>0.1044 ms</td><td>0.2482 ms</td><td>5.789 ms</td>
+</tr><tr><td>Any_Get5000BooksMatchId</td><td>5.610 ms</td><td>0.1073 ms</td><td>0.1357 ms</td><td>5.600 ms</td>
+</tr><tr><td>Exists_Get5000BooksMatchId</td><td>5.629 ms</td><td>0.1086 ms</td><td>0.1207 ms</td><td>5.582 ms</td>
+</tr><tr><td>Count_Get10000BooksMatchId</td><td>13.019 ms</td><td>0.2370 ms</td><td>0.3689 ms</td><td>13.050 ms</td>
+</tr><tr><td>Any_Get10000BooksMatchId</td><td>12.639 ms</td><td>0.2511 ms</td><td>0.3084 ms</td><td>12.676 ms</td>
+</tr><tr><td>Exists_Get10000BooksMatchId</td><td>12.788 ms</td><td>0.2475 ms</td><td>0.3628 ms</td><td>12.891 ms</td>
 </tr></tbody></table>
 </body>
 </html>
