@@ -6,3 +6,5 @@ https://learn.microsoft.com/pt-br/dotnet/api/system.array.exists
 
 
 ![More info for these benchs](./images/results_with_more_details.png)
+
+to more infos see [BenchmarkDotNet.Artifacts/results/Thiago.Benchmarks.CountAnyExistBenchmark-report-github.md](../BenchmarkDotNet.Artifacts/results/Thiago.Benchmarks.CountAnyExistBenchmark-report-github.md)
