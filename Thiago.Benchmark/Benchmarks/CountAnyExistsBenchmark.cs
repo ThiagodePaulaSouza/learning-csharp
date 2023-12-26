@@ -101,4 +101,52 @@ public class CountAnyExistBenchmark
         var books = await bookService.Get10000BookId();
         return books.Exists(x => x.Id == 1);
     }
+
+    [Benchmark]
+    public async Task<bool> Count_Get100000BooksMatchId()
+    {
+        var bookService = new BookService(new MyConvertJson());
+        var books = await bookService.Get100000BookId();
+        return books.Count(x => x.Id == 1) > 0;
+    }
+
+    [Benchmark]
+    public async Task<bool> Any_Get100000BooksMatchId()
+    {
+        var bookService = new BookService(new MyConvertJson());
+        var books = await bookService.Get100000BookId();
+        return books.Any(x => x.Id == 1);
+    }
+
+    [Benchmark]
+    public async Task<bool> Exists_Get100000BooksMatchId()
+    {
+        var bookService = new BookService(new MyConvertJson());
+        var books = await bookService.Get100000BookId();
+        return books.Exists(x => x.Id == 1);
+    }
+
+    [Benchmark]
+    public async Task<bool> Count_Get100000000BooksMatchId()
+    {
+        var bookService = new BookService(new MyConvertJson());
+        var books = await bookService.Get100000000BookId();
+        return books.Count(x => x.Id == 1) > 0;
+    }
+
+    [Benchmark]
+    public async Task<bool> Any_Get100000000BooksMatchId()
+    {
+        var bookService = new BookService(new MyConvertJson());
+        var books = await bookService.Get100000000BookId();
+        return books.Any(x => x.Id == 1);
+    }
+
+    [Benchmark]
+    public async Task<bool> Exists_Get100000000BooksMatchId()
+    {
+        var bookService = new BookService(new MyConvertJson());
+        var books = await bookService.Get100000000BookId();
+        return books.Exists(x => x.Id == 1);
+    }
 }
