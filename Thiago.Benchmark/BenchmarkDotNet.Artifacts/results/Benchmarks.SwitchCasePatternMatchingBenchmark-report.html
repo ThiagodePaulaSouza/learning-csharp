@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>Benchmarks.SwitchCasePatternMatchingBenchmark-20231225-223300</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.13.11, Windows 11 (10.0.22621.2861/22H2/2022Update/SunValley2)
+11th Gen Intel Core i5-1135G7 2.40GHz, 1 CPU, 8 logical and 4 physical cores
+.NET SDK 8.0.100
+  [Host]     : .NET 8.0.0 (8.0.23.53103), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+  DefaultJob : .NET 8.0.0 (8.0.23.53103), X64 RyuJIT AVX-512F+CD+BW+DQ+VL+VBMI
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                                                                         </th><th>Mean  </th><th>Error</th><th>StdDev</th><th>Median</th>
+</tr>
+</thead><tbody><tr><td>NormalSwitchCase_foreach_Enumerable_Get10UsersMatchName_ReturnAttrValue</td><td>196.695 ms</td><td>31.9721 ms</td><td>91.7341 ms</td><td>151.566 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_foreach_Enumerable_Get10UsersMatchName_ReturnAttrValue</td><td>243.106 ms</td><td>69.4428 ms</td><td>204.7537 ms</td><td>346.644 ms</td>
+</tr><tr><td>NormalSwitchCase_ForEach_Generic_Get10UsersMatchName_ReturnAttrValue</td><td>222.281 ms</td><td>68.5370 ms</td><td>202.0830 ms</td><td>58.242 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_ForEach_Generic_Get10UsersMatchName_ReturnAttrValue</td><td>207.536 ms</td><td>62.4350 ms</td><td>184.0910 ms</td><td>57.436 ms</td>
+</tr><tr><td>NormalSwitchCase_foreach_Enumerable_Get1000BooksMatchId_ReturnAttrValue</td><td>1.659 ms</td><td>0.0922 ms</td><td>0.2705 ms</td><td>1.633 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_foreach_Enumerable_Get1000BooksMatchId_ReturnAttrValue</td><td>1.355 ms</td><td>0.0342 ms</td><td>0.0960 ms</td><td>1.323 ms</td>
+</tr><tr><td>NormalSwitchCase_ForEach_Generic_Get1000BooksMatchId_ReturnAttrValue</td><td>1.422 ms</td><td>0.0284 ms</td><td>0.0810 ms</td><td>1.412 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_ForEach_Generic_Get1000BooksMatchId_ReturnAttrValue</td><td>1.461 ms</td><td>0.0388 ms</td><td>0.1101 ms</td><td>1.431 ms</td>
+</tr><tr><td>NormalSwitchCase_foreach_Enumerable_Get5000BooksMatchId_ReturnAttrValue</td><td>5.859 ms</td><td>0.1321 ms</td><td>0.3810 ms</td><td>5.785 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_foreach_Enumerable_Get5000BooksMatchId_ReturnAttrValue</td><td>5.711 ms</td><td>0.1135 ms</td><td>0.2214 ms</td><td>5.707 ms</td>
+</tr><tr><td>NormalSwitchCase_ForEach_Generic_Get5000BooksMatchId_ReturnAttrValue</td><td>5.763 ms</td><td>0.1119 ms</td><td>0.2479 ms</td><td>5.779 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_ForEach_Generic_Get5000BooksMatchId_ReturnAttrValue</td><td>6.052 ms</td><td>0.1950 ms</td><td>0.5625 ms</td><td>5.910 ms</td>
+</tr><tr><td>NormalSwitchCase_foreach_Enumerable_Get10000BooksMatchId_ReturnAttrValue</td><td>12.734 ms</td><td>0.2544 ms</td><td>0.6476 ms</td><td>12.726 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_foreach_Enumerable_Get10000BooksMatchId_ReturnAttrValue</td><td>12.860 ms</td><td>0.2562 ms</td><td>0.7185 ms</td><td>12.785 ms</td>
+</tr><tr><td>NormalSwitchCase_ForEach_Generic_Get10000BooksMatchId_ReturnAttrValue</td><td>12.879 ms</td><td>0.3159 ms</td><td>0.9012 ms</td><td>12.688 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_ForEach_Generic_Get10000BooksMatchId_ReturnAttrValue</td><td>12.823 ms</td><td>0.2481 ms</td><td>0.6707 ms</td><td>12.717 ms</td>
+</tr><tr><td>NormalSwitchCase_foreach_Enumerable_Get100000BooksMatchId_ReturnAttrValue</td><td>148.652 ms</td><td>2.9689 ms</td><td>7.1702 ms</td><td>147.869 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_foreach_Enumerable_Get100000BooksMatchId_ReturnAttrValue</td><td>142.619 ms</td><td>5.1725 ms</td><td>15.0886 ms</td><td>139.094 ms</td>
+</tr><tr><td>NormalSwitchCase_ForEach_Generic_Get100000BooksMatchId_ReturnAttrValue</td><td>148.730 ms</td><td>2.9674 ms</td><td>8.0224 ms</td><td>147.836 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_ForEach_Generic_Get100000BooksMatchId_ReturnAttrValue</td><td>154.299 ms</td><td>4.6309 ms</td><td>13.5816 ms</td><td>152.929 ms</td>
+</tr><tr><td>NormalSwitchCase_foreach_Enumerable_Get100000000BooksMatchId_ReturnAttrValue</td><td>1,481.504 ms</td><td>29.6007 ms</td><td>82.0234 ms</td><td>1,481.778 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_foreach_Enumerable_Get100000000BooksMatchId_ReturnAttrValue</td><td>1,458.332 ms</td><td>28.8635 ms</td><td>29.6406 ms</td><td>1,467.894 ms</td>
+</tr><tr><td>NormalSwitchCase_ForEach_Generic_Get100000000BooksMatchId_ReturnAttrValue</td><td>1,481.001 ms</td><td>28.9206 ms</td><td>39.5869 ms</td><td>1,468.967 ms</td>
+</tr><tr><td>PatternMatchingSwitchCase_ForEach_Generic_Get100000000BooksMatchId_ReturnAttrValue</td><td>1,410.756 ms</td><td>27.8796 ms</td><td>65.7156 ms</td><td>1,397.723 ms</td>
+</tr></tbody></table>
+</body>
+</html>
