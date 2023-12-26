@@ -1,3 +1,3 @@
-namespace Thiago.Objects;
+namespace Helpers.Objects;
 
 public record BookIdObject(uint Id);

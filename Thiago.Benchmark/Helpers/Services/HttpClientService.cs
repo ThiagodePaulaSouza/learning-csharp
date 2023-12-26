@@ -1,4 +1,4 @@
-namespace Thiago.Services;
+namespace Helpers.Services;
 
 public class HttpClientService
 {

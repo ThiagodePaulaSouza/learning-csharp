@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Thiago.Services;
+namespace Helpers.Services;
 
 public class MyConvertJson
 {

@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
-using Thiago.Objects;
+using Helpers.Objects;
 
-namespace Thiago.Services;
+namespace Helpers.Services;
 
 public class BookService
 {

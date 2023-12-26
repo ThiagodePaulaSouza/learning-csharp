@@ -1,7 +1,7 @@
 using BenchmarkDotNet.Attributes;
-using Thiago.Services;
+using Helpers.Services;
 
-namespace Thiago.Benchmarks;
+namespace Benchmarks;
 
 public class CountAnyExistBenchmark
 {

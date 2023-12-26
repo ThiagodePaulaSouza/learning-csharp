@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Running;
-using Thiago.Benchmarks;
+using Benchmarks;
 
 namespace Thiago.Program;
 
