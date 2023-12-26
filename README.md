@@ -7,4 +7,4 @@ instalar .net v4.8 developerPack
 - [Jogo de pong](https://github.com/ThiagodePaulaSouza/Pong-CS)
 - [Todo APi](https://github.com/ThiagodePaulaSouza/learning-csharp/tree/main/TodoApi)
 - [Api Minima](https://github.com/ThiagodePaulaSouza/learning-csharp/tree/main/minimal-api-desenvolvedor-io)
-- 
+- [Benchmarks](https://github.com/ThiagodePaulaSouza/learning-csharp/tree/main/Thiago.Benchmark)
